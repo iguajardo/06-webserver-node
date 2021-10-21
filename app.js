@@ -1,7 +1,12 @@
 const express = require('express');
-const app = express();
+const hbs = require('hbs');
 
+const app = express();
 const port = 8080;
+
+app.set('view engine', 'hbs'); // handlebars buscará la carpeta views
+hbs.registerPartials(`${__dirname}/views/partials`);
+
 
 // Servir contenido estático
 // Lo servirá de inmediato en el root, por eso se puede eliminar la ruta / en los gets
@@ -9,7 +14,6 @@ const port = 8080;
 // y cuando se desea entrar a otra ruta, buscará una carpeta con ese mismo nombre
 // estas carpetas tienen prioridad al igual que el root /, si no se encuentra,
 // se buscarán las rutas definidas
-app.set('view engine', 'hbs'); // handlebars buscará la carpeta views
 
 app.use(express.static('public'));
 
@@ -23,18 +27,29 @@ app.use(express.static('public'));
     Si esa ruta no existe, se enviará un mensaje de que no se encuentra
 */
 
-app.get('/', (req, res) => {
-    res.render('home');
+app.get('/', (req, res) => { // estos callbacks serían los controladores
+    res.render('home', {
+        nombre: 'Italo',
+        titulo: 'Curso de Node'
+    }); // objecto con todas las opciones
+    // estos atributos llegarán como variables a la vista, y se podrán usar con {{}}
+    // como en Angular y similar a React
 });
 
 app.get('/generic', (req, res) => {
     // send envía la respuesta de inmediato, no necesita end, y le agrega el cuerpo
     // según los argumentos que le enviemos
-    res.sendFile(`${__dirname}/public/generic.html`);
+    res.render('generic', {
+        nombre: 'Italo',
+        titulo: 'Generic'
+    });
 });
 
 app.get('/elements', (req, res) => {
-    res.sendFile(`${__dirname}/public/elements.html`);
+    res.render('elements', {
+        nombre: 'Italo',
+        titulo: 'Elements'
+    });
 });
 
 // Cualquier ruta que no sea las anteriores, repsonderá con lo siguiente
