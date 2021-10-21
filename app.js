@@ -10,15 +10,22 @@ http.createServer((request, response) => {
     // Se puede hacer un console.log a la request, para ver la request http que se recibe
 
 
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    // response.writeHead(200, { 'Content-Type': 'application/json' });
+    response.setHeader('Content-Disposition', 'attachment; filename=list.csv');
+    response.writeHead(200, { 'Content-Type': 'application/csv' });
 
-    const persona = {
-        id: 1,
-        nombre: 'Italo'
-    };
+    // const persona = {
+    //     id: 1,
+    //     nombre: 'Italo'
+    // };
 
     // para enviar un body, se hace con write:
-    response.write(JSON.stringify(persona));
+    // escribir distintos write, concatena el contenido al final
+    response.write('id, nombre;');
+    response.write('1, Italo;');
+    response.write('2, Nati;');
+    response.write('3, Ami;');
+    response.write('4, Black;');
 
     // se debe terminar la respuesta para enviarla, o queda en espera.
     // además, la respuesta solo manda el text sin ninguna otra opción, como indicar que es un JSON
