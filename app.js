@@ -24,7 +24,9 @@ app.get('/hola-mundo', (req, res) => {
 
 // Cualquier ruta que no sea las anteriores, repsonderá con lo siguiente
 app.get('*', (req, res) => {
-    res.send('404 | Page not found');
+    // Se puede enviar un recurso directamente
+    // pero debe ser con sendFile y una ruta absoluta
+    res.sendFile(`${__dirname}/public/404.html`);
 });
 
 // El callback no es obligatorio
