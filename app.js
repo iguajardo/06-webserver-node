@@ -1,8 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const hbs = require('hbs');
 
+
+// (Dentro del package.json se debe indicar el comando "start": "node app.js",
+// ya que muchos hosting aplicarán ese comando para iniciar la aplicación)
+
+
 const app = express();
-const port = 8080;
+const port = process.env.PORT;
 
 app.set('view engine', 'hbs'); // handlebars buscará la carpeta views
 hbs.registerPartials(`${__dirname}/views/partials`);
