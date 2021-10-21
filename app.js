@@ -9,7 +9,7 @@ const port = 8080;
 // y cuando se desea entrar a otra ruta, buscará una carpeta con ese mismo nombre
 // estas carpetas tienen prioridad al igual que el root /, si no se encuentra,
 // se buscarán las rutas definidas
-app.use(express.static('public'));
+app.use(express.static('templated-roadtrip'));
 
 /* 
     A diferencia del paquete http, se le indica de inmediato la ruta a la que se se enviará una response
