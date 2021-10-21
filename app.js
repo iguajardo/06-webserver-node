@@ -7,10 +7,23 @@ const port = 8080;
 // crea un servidor y lo levanta de inmediato, si hay un error se cae, por eso se usa nodemon
 http.createServer((request, response) => {
 
-    response.write('Hola Mundo');
+    // Se puede hacer un console.log a la request, para ver la request http que se recibe
+
+
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
+
+    const persona = {
+        id: 1,
+        nombre: 'Italo'
+    };
+
+    // para enviar un body, se hace con write:
+    response.write(JSON.stringify(persona));
 
     // se debe terminar la respuesta para enviarla, o queda en espera.
     // además, la respuesta solo manda el text sin ninguna otra opción, como indicar que es un JSON
+    // esto pasa porque por defecto uno envía en el header un "connection": "keep-alive", y quedará
+    // pendiente con la conexión abierta hasta recibir una respuesta del servidor
     response.end();
 
 }).listen(port); // abre el puerto
