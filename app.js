@@ -9,12 +9,23 @@ const port = 8080;
 // y cuando se desea entrar a otra ruta, buscará una carpeta con ese mismo nombre
 // estas carpetas tienen prioridad al igual que el root /, si no se encuentra,
 // se buscarán las rutas definidas
+app.set('view engine', 'hbs'); // handlebars buscará la carpeta views
+
 app.use(express.static('public'));
+
+
+// si se desea acceder a un recurso sin su extensión, además de lo que se hace más adelante
+// se puede crear una carpeta dentro de public con el nombre de la ruta, y dentro de esa carpeta
+// express buscará un index.html
 
 /* 
     A diferencia del paquete http, se le indica de inmediato la ruta a la que se se enviará una response
     Si esa ruta no existe, se enviará un mensaje de que no se encuentra
 */
+
+app.get('/', (req, res) => {
+    res.render('home');
+});
 
 app.get('/generic', (req, res) => {
     // send envía la respuesta de inmediato, no necesita end, y le agrega el cuerpo
@@ -23,8 +34,6 @@ app.get('/generic', (req, res) => {
 });
 
 app.get('/elements', (req, res) => {
-    // send envía la respuesta de inmediato, no necesita end, y le agrega el cuerpo
-    // según los argumentos que le enviemos
     res.sendFile(`${__dirname}/public/elements.html`);
 });
 
