@@ -9,6 +9,10 @@ http.createServer((request, response) => {
 
     response.write('Hola Mundo');
 
+    // se debe terminar la respuesta para enviarla, o queda en espera.
+    // además, la respuesta solo manda el text sin ninguna otra opción, como indicar que es un JSON
+    response.end();
+
 }).listen(port); // abre el puerto
 
 console.log('Escuchando el puerto', port);
