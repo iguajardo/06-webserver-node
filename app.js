@@ -21,11 +21,11 @@ http.createServer((request, response) => {
 
     // para enviar un body, se hace con write:
     // escribir distintos write, concatena el contenido al final
-    response.write('id, nombre;');
-    response.write('1, Italo;');
-    response.write('2, Nati;');
-    response.write('3, Ami;');
-    response.write('4, Black;');
+    response.write('id, nombre\n');
+    response.write('1, Italo\n');
+    response.write('2, Nati\n');
+    response.write('3, Ami\n');
+    response.write('4, Black\n');
 
     // se debe terminar la respuesta para enviarla, o queda en espera.
     // además, la respuesta solo manda el text sin ninguna otra opción, como indicar que es un JSON
